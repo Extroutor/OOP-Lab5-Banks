@@ -33,6 +33,6 @@ public class Main {
 
         IAccount account2 = new DebitAccount(bank1.getPercentage());
 
-        bank1.Transfer(account1, account2, 5000.);
+        bank1.transfer(account1, account2, 5000.);
     }
 }

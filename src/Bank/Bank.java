@@ -16,51 +16,41 @@ public class Bank {
     ArrayList<Client> _listOfClients = new ArrayList<>();
 
     Bank(final BankBuilder bankBuilder) {
-
         _bankID = bankBuilder.getBankID();
         _percentage = bankBuilder.getPercentage();
         _commission = bankBuilder.getCommission();
         _limitOnTransferForSuspiciousAccount = bankBuilder.getLimitOnTransferForSuspiciousAccount();
         _limitOnWithdrawingForSuspiciousAccount = bankBuilder.getLimitOnWithdrawingForSuspiciousAccount();
-
     }
 
     public void addClient(Client client) throws Exception {
-
         if (_listOfClients.contains(client))
             throw new Exception("Client is already exists");
         _listOfClients.add(client);
-
     }
 
 
     public void linkAccountToClient(Client client, IAccount account) throws Exception {
-
         if (client.isActive())
             client.addAccount(account);
         else
-            throw new Exception("Account is not active");
-
+            throw new Exception("Account is not active");//
     }
 
     public void withdraw(Client client, IAccount account, Double amountToWithdraw) throws Exception {
-
         if (!client.isActive() && amountToWithdraw > _limitOnWithdrawingForSuspiciousAccount)
         {
             throw new Exception("The client is not active, maximum withdrawal allowed is " + _limitOnWithdrawingForSuspiciousAccount);
         }
 
         client.withdrawFromAccount(account, amountToWithdraw);
-
     }
 
     public void deposit(Client client, IAccount account, double money) throws Exception {
-
-        client.AddingToAccount(account, money);
-
+        client.addingToAccount(account, money);
     }
 
-    public void Transfer(IAccount accountFrom, IAccount accountTo, Double amountToTransfer) throws Exception {
+    public void transfer(IAccount accountFrom, IAccount accountTo, Double amountToTransfer) throws Exception {
         var client = getClientWithAccountId(accountFrom._accountID);
         if (!client.isActive() && amountToTransfer > _limitOnTransferForSuspiciousAccount)
         {

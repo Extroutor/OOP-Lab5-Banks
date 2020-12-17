@@ -10,6 +10,6 @@ public interface IAccount {
     UUID _accountID = null;
     void withdraw(Double amountToWithdraw) throws Exception;
     void deposit(Double amountToDeposit) throws Exception;
-    void calculateDailyProfit(Long day) throws Exception;
-    Double calculateMonthlyProfit() throws Exception;
+    void calculateDailyPercent(Long day) throws Exception;
+    Double calculateMonthlyPercent() throws Exception;
 }

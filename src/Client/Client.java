@@ -17,7 +17,6 @@ public class Client {
     private String _surname;
     private String _address = null;
     private Integer _passport = null;
-//    private boolean _active = isActive();
 
     Client(final ClientBuilder clientBuilder) {
         _name = clientBuilder.getName();
@@ -30,53 +29,8 @@ public class Client {
         accounts.add(account);
     }
 
-    public void AddingToAccount(IAccount account, double money) throws Exception {
+    public void addingToAccount(IAccount account, double money) throws Exception {
         _command = new Adding(account, money);
-        _command.execute();
-    }
-
-    public void SetName(String name)
-    {
-        _name = name;
-    }
-
-    public void SetFamilyName(String surname)
-    {
-        _surname = surname;
-    }
-
-    public void SetPassportNumber(Integer passportNumber)
-    {
-        _passport = passportNumber;
-    }
-
-    public void setAddress(String address)
-    {
-        _address = address;
-    }
-
-    public String getName()
-    {
-        return _name;
-    }
-
-    public String getSurname()
-    {
-        return _surname;
-    }
-
-    public String getAddress()
-    {
-        return _address;
-    }
-
-    public Integer getPassportNumber()
-    {
-        return _passport;
-    }
-
-    public void depositToAccount(IAccount account, Double amountToDeposit) throws Exception {
-        _command = new Adding(account, amountToDeposit);
         _command.execute();
     }
 
@@ -90,8 +44,7 @@ public class Client {
         _command.execute();
     }
 
-    public boolean isActive()
-    {
+    public boolean isActive() {
         return _address != null || _passport != null;
     }
 
@@ -106,16 +59,27 @@ public class Client {
         return account;
     }
 
-    public void PrintTransactions()
-    {
-        for (var tr : accounts) {
-            System.out.println(tr.TransactionsList);
-        }
-
-//        for (var tr : accounts.SelectMany(account => account.TransactionsList))
-//        {
-//            System.out.println("{tr.TransactionType} {tr.TransactionAmount}");
-//        }
+    public void SetPassportNumber(Integer passportNumber) {
+        _passport = passportNumber;
     }
 
+    public void setAddress(String address) {
+        _address = address;
+    }
+
+    public String getName() {
+        return _name;
+    }
+
+    public String getSurname() {
+        return _surname;
+    }
+
+    public String getAddress() {
+        return _address;
+    }
+
+    public Integer getPassportNumber() {
+        return _passport;
+    }
 }

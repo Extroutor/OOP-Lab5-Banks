@@ -7,7 +7,7 @@ import java.util.UUID;
 public class Deposit implements IAccount {
 
     public HashMap<Long, Double> _dailyPercentageList = new HashMap<>();
-    public boolean CanWithdrawOrTransfer;
+    public boolean _canWithdrawOrTransfer;
 
     public UUID _accountID;
     public Double _percentage;
@@ -17,14 +17,14 @@ public class Deposit implements IAccount {
 
     public Deposit(Double initialDepositAmount, Long dueDate) {
         _accountID = UUID.randomUUID();
-        _percentage = getProfitRate(initialDepositAmount);
+        _percentage = getPercentRate(initialDepositAmount);
         _commission = 0.;
         _accountBalance = initialDepositAmount;
-        CanWithdrawOrTransfer = false;
+        _canWithdrawOrTransfer = false;
         _dueDate = dueDate;
     }
 
-    public double getProfitRate(double initialDepositAmount) {
+    public double getPercentRate(double initialDepositAmount) {
         if (initialDepositAmount >= 1 && initialDepositAmount <= 50000)
             return 0.03;
         else if (initialDepositAmount >= 50001 && initialDepositAmount <= 100000)
@@ -51,14 +51,14 @@ public class Deposit implements IAccount {
     }
 
     @Override
-    public void calculateDailyProfit(Long day) {
+    public void calculateDailyPercent(Long day) {
         double dailyProfitRate = _percentage / 365;
         Double todaysProfit = dailyProfitRate * _accountBalance;
         _dailyPercentageList.put(day, todaysProfit);
     }
 
     @Override
-    public Double calculateMonthlyProfit() {
+    public Double calculateMonthlyPercent() {
         Double monthlyProfit = null;
         for (var day : _dailyPercentageList.keySet()) {
             monthlyProfit += _dailyPercentageList.get(day);

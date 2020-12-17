@@ -5,9 +5,9 @@ import Transaction.TransferTransaction;
 
 public class Transfer implements ICommand{
 
-    private double _amountForTransfer;
-    private IAccount _accountFROM;
-    private IAccount _accountTO;
+    private final double _amountForTransfer;
+    private final IAccount _accountFROM;
+    private final IAccount _accountTO;
     private TransferTransaction _transfer;
 
 

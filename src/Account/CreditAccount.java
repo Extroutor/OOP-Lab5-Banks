@@ -7,13 +7,13 @@ import java.util.UUID;
 public class CreditAccount implements IAccount {
 
     private final HashMap<Long, Double> _commissionsList = new HashMap<>();
-    public boolean CanWithdrawOrTransfer;
+    public boolean _canWithdrawOrTransfer;
 
     public UUID _accountID;
     public double _percentage;
     public double _commission;
     public double _accountBalance;
-    private final double _upperLimit;
+//    private final double _upperLimit;
     private final double _lowerLimit;
 
 
@@ -22,8 +22,8 @@ public class CreditAccount implements IAccount {
         _percentage = 0;
         _commission = commissionRate;
         _accountBalance = upperLimit;
-        CanWithdrawOrTransfer = true;
-        _upperLimit = upperLimit;
+        _canWithdrawOrTransfer = true;
+//        _upperLimit = upperLimit;
         _lowerLimit = lowerLimit;
     }
 
@@ -48,12 +48,12 @@ public class CreditAccount implements IAccount {
     }
 
     @Override
-    public void calculateDailyProfit(Long day) throws Exception {
-        throw new Exception("Credit account doesn't have profit.");
+    public void calculateDailyPercent(Long day) throws Exception {
+        throw new Exception("Credit account doesn't have percent.");
     }
 
     @Override
-    public Double calculateMonthlyProfit() throws Exception {
-        throw new Exception("Credit account doesn't have profit.");
+    public Double calculateMonthlyPercent() throws Exception {
+        throw new Exception("Credit account doesn't have percent.");
     }
 }

@@ -22,7 +22,7 @@ public class DebitAccount implements IAccount {
     @Override
     public void withdraw(Double amountToWithdraw) throws Exception {
         if (amountToWithdraw > accountBalance) {
-            throw new Exception("Not enough balance in the account!");
+            throw new Exception("Not enough money in the account!");
         } else {
             accountBalance -= amountToWithdraw;
         }
@@ -34,20 +34,20 @@ public class DebitAccount implements IAccount {
     }
 
     @Override
-    public void calculateDailyProfit(Long day) {
+    public void calculateDailyPercent(Long day) {
         var dailyPercentRate = percentage / 365; //округлить
         var todaysPercent = dailyPercentRate * accountBalance;
         _dailyPercentageList.put(day, todaysPercent);
     }
 
     @Override
-    public Double calculateMonthlyProfit() {
+    public Double calculateMonthlyPercent() {
         Double monthlyPercent = null;
         for (var day : _dailyPercentageList.keySet()) {
             monthlyPercent += _dailyPercentageList.get(day);
         }
         accountBalance += monthlyPercent;
-        System.out.println("This months Profit : " + monthlyPercent);
+        System.out.println("This months percent : " + monthlyPercent);
         _dailyPercentageList.clear();
         return monthlyPercent;
     }
