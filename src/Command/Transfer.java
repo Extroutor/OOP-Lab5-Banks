@@ -1,35 +1,35 @@
 package Command;
 
-import Account.Account;
+import Account.IAccount;
 import Transaction.TransferTransaction;
 
 public class Transfer implements ICommand{
 
     private double _amountForTransfer;
-    private Account _accountFROM;
-    private Account _accountTO;
+    private IAccount _accountFROM;
+    private IAccount _accountTO;
     private TransferTransaction _transfer;
 
 
-    public Transfer(Account accountFROM, Account accountTO, double amountForTransfer) {
+    public Transfer(IAccount accountFROM, IAccount accountTO, double amountForTransfer) {
         _accountFROM = accountFROM;
         _accountTO = accountTO;
         _amountForTransfer = amountForTransfer;
     }
 
     @Override
-    public void Execute() throws Exception {
-        _accountFROM.Withdraw(_amountForTransfer);
-        _accountTO.Deposit(_amountForTransfer);
+    public void execute() throws Exception {
+        _accountFROM.withdraw(_amountForTransfer);
+        _accountTO.deposit(_amountForTransfer);
         _transfer = new TransferTransaction(_accountFROM, _accountTO, _amountForTransfer);
         _accountFROM.TransactionsList.add(_transfer);
         _accountTO.TransactionsList.add(_transfer);
     }
 
     @Override
-    public void Undo() throws Exception {
-        _accountFROM.Deposit(_amountForTransfer);
-        _accountTO.Withdraw(_amountForTransfer);
+    public void undo() throws Exception {
+        _accountFROM.deposit(_amountForTransfer);
+        _accountTO.withdraw(_amountForTransfer);
         _accountFROM.TransactionsList.remove(_transfer);
         _accountTO.TransactionsList.remove(_transfer);
     }

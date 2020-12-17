@@ -4,12 +4,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class CreditAccount implements Account {
+public class CreditAccount implements IAccount {
 
     private final HashMap<Long, Double> _commissionsList = new HashMap<>();
     public boolean CanWithdrawOrTransfer;
 
-    //public AccountType _accountType;
     public UUID _accountID;
     public double _percentage;
     public double _commission;
@@ -19,7 +18,6 @@ public class CreditAccount implements Account {
 
 
     public CreditAccount(double upperLimit, double lowerLimit, double commissionRate) {
-        //_accountType = AccountType.Credit;
         _accountID = UUID.randomUUID();
         _percentage = 0;
         _commission = commissionRate;
@@ -30,7 +28,7 @@ public class CreditAccount implements Account {
     }
 
     @Override
-    public void Withdraw(Double amountToWithdraw) throws Exception {
+    public void withdraw(Double amountToWithdraw) throws Exception {
         if (!(_accountBalance - amountToWithdraw <= _lowerLimit)) {
             _accountBalance -= amountToWithdraw;
             if (_accountBalance < 0 && _accountBalance - amountToWithdraw * _commission <= _lowerLimit) {
@@ -45,17 +43,17 @@ public class CreditAccount implements Account {
     }
 
     @Override
-    public void Deposit(Double amountToDeposit) throws Exception {
+    public void deposit(Double amountToDeposit) throws Exception {
         throw new Exception("Credit account cannot accept deposits.");
     }
 
     @Override
-    public void CalculateDailyProfit(Long day) throws Exception {
+    public void calculateDailyProfit(Long day) throws Exception {
         throw new Exception("Credit account doesn't have profit.");
     }
 
     @Override
-    public Double CalculateMonthlyProfit() throws Exception {
+    public Double calculateMonthlyProfit() throws Exception {
         throw new Exception("Credit account doesn't have profit.");
     }
 }

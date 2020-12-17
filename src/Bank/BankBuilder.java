@@ -3,7 +3,6 @@ package Bank;
 import java.util.UUID;
 
 public class BankBuilder {
-
     private UUID _bankID;
     private double _percentage;
     private double _commission;
@@ -42,5 +41,4 @@ public class BankBuilder {
     public UUID getBankID() { return _bankID; }
 
     public Bank build() { return new Bank(this); }
-
 }

@@ -23,9 +23,16 @@ public class Main {
 
         bank1.addClient(client1);
 
-        Account account1 = new DebitAccount(bank1.getPercentage());
+        IAccount account1 = new DebitAccount(bank1.getPercentage());
         bank1.linkAccountToClient(client1, account1);
 
+        System.out.println("Information about client:" + "\n");
+        bank1.printClients();
+
         bank1.deposit(client1, account1, 10000);
+
+        IAccount account2 = new DebitAccount(bank1.getPercentage());
+
+        bank1.Transfer(account1, account2, 5000.);
     }
 }

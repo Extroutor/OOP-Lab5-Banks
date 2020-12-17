@@ -1,6 +1,6 @@
 package Command;
 
 public interface ICommand {
-    void Execute() throws Exception;
-    void Undo() throws Exception;
+    void execute() throws Exception;
+    void undo() throws Exception;
 }

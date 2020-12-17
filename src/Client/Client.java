@@ -1,6 +1,6 @@
 package Client;
 
-import Account.Account;
+import Account.IAccount;
 import Command.Adding;
 import Command.ICommand;
 import Command.Transfer;
@@ -11,13 +11,13 @@ import java.util.UUID;
 
 public class Client {
 
-    private ArrayList<Account> accounts = new ArrayList<>();
+    private ArrayList<IAccount> accounts = new ArrayList<>();
     private ICommand _command;
     private String _name;
     private String _surname;
-    private String _address;
-    private Integer _passport;
-    private boolean active;
+    private String _address = null;
+    private Integer _passport = null;
+//    private boolean _active = isActive();
 
     Client(final ClientBuilder clientBuilder) {
         _name = clientBuilder.getName();
@@ -26,13 +26,13 @@ public class Client {
         _passport = clientBuilder.getPassport();
     }
 
-    public void addAccount(Account account) {
+    public void addAccount(IAccount account) {
         accounts.add(account);
     }
 
-    public void AddingToAccount(Account account, double money) throws Exception {
+    public void AddingToAccount(IAccount account, double money) throws Exception {
         _command = new Adding(account, money);
-        _command.Execute();
+        _command.execute();
     }
 
     public void SetName(String name)
@@ -75,47 +75,47 @@ public class Client {
         return _passport;
     }
 
-    public void AddAccount(Account account)
-    {
-        accounts.add(account);
-    }
-
-    public void ChangeStatus(boolean isActive)
-    {
-        active = isActive;
-    }
-
-    public void DepositToAccount(Account account, Double amountToDeposit) throws Exception {
+    public void depositToAccount(IAccount account, Double amountToDeposit) throws Exception {
         _command = new Adding(account, amountToDeposit);
-        _command.Execute();
+        _command.execute();
     }
 
-    public void WithdrawFromAccount(Account account, Double amountToWithdraw) throws Exception {
+    public void withdrawFromAccount(IAccount account, Double amountToWithdraw) throws Exception {
         _command = new Withdraw(account, amountToWithdraw);
-        _command.Execute();
+        _command.execute();
     }
 
-    public void Transfer(Account sourceAccount, Account destinationAccount, Double amountToTransfer) throws Exception {
+    public void transfer(IAccount sourceAccount, IAccount destinationAccount, Double amountToTransfer) throws Exception {
         _command = new Transfer(sourceAccount, destinationAccount, amountToTransfer);
-        _command.Execute();
+        _command.execute();
     }
 
     public boolean isActive()
     {
-        return active;
+        return _address != null || _passport != null;
     }
 
-//    public Account GetAccount(UUID accountId)
-//    {
-//        return accounts.FirstOrDefault(account => account.AccountId == accountId);
-//    }
-//
-//    public void PrintTransactions()
-//    {
+    public IAccount getAccount(UUID accountId) throws Exception {
+        IAccount account = null;
+        for (var acc : accounts) {
+            if (acc._accountID == accountId)
+                account = acc;
+        }
+        if (account == null)
+            throw new Exception("Account does not exist");
+        return account;
+    }
+
+    public void PrintTransactions()
+    {
+        for (var tr : accounts) {
+            System.out.println(tr.TransactionsList);
+        }
+
 //        for (var tr : accounts.SelectMany(account => account.TransactionsList))
 //        {
 //            System.out.println("{tr.TransactionType} {tr.TransactionAmount}");
 //        }
-//    }
+    }
 
 }
