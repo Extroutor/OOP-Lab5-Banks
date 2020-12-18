@@ -13,9 +13,7 @@ public class CreditAccount implements IAccount {
     public double _percentage;
     public double _commission;
     public double _accountBalance;
-//    private final double _upperLimit;
     private final double _lowerLimit;
-
 
     public CreditAccount(double upperLimit, double lowerLimit, double commissionRate) {
         _accountID = UUID.randomUUID();
@@ -23,7 +21,6 @@ public class CreditAccount implements IAccount {
         _commission = commissionRate;
         _accountBalance = upperLimit;
         _canWithdrawOrTransfer = true;
-//        _upperLimit = upperLimit;
         _lowerLimit = lowerLimit;
     }
 
@@ -55,5 +52,15 @@ public class CreditAccount implements IAccount {
     @Override
     public Double calculateMonthlyPercent() throws Exception {
         throw new Exception("Credit account doesn't have percent.");
+    }
+
+    @Override
+    public void listOfTransactions(IAccount account) {
+
+        for (var trans : TransactionsList) {
+
+            trans.getList();
+
+        }
     }
 }

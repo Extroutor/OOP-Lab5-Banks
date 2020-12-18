@@ -12,4 +12,5 @@ public interface IAccount {
     void deposit(Double amountToDeposit) throws Exception;
     void calculateDailyPercent(Long day) throws Exception;
     Double calculateMonthlyPercent() throws Exception;
+    void listOfTransactions(IAccount account);
 }

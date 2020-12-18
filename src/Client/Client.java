@@ -44,6 +44,10 @@ public class Client {
         _command.execute();
     }
 
+    public void undo(IAccount account) throws Exception {
+        _command.undo();
+    }
+
     public boolean isActive() {
         return _address != null || _passport != null;
     }

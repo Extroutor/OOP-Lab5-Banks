@@ -26,6 +26,7 @@ public class Main {
         IAccount account1 = new DebitAccount(bank1.getPercentage());
         bank1.linkAccountToClient(client1, account1);
 
+        System.out.println("");
         System.out.println("Information about client:" + "\n");
         bank1.printClients();
 
@@ -34,5 +35,13 @@ public class Main {
         IAccount account2 = new DebitAccount(bank1.getPercentage());
 
         bank1.transfer(account1, account2, 5000.);
+
+        System.out.println("Information about transactions:" + "\n");
+        account1.listOfTransactions(account1);
+
+        bank1.undoLastTransaction(account1);
+
+        System.out.println("Information about transactions:" + "\n");
+        account1.listOfTransactions(account1);
     }
 }

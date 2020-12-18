@@ -29,12 +29,8 @@ public class Bank {
         _listOfClients.add(client);
     }
 
-
     public void linkAccountToClient(Client client, IAccount account) throws Exception {
-        if (client.isActive())
             client.addAccount(account);
-        else
-            throw new Exception("Account is not active");//
     }
 
     public void withdraw(Client client, IAccount account, Double amountToWithdraw) throws Exception {
@@ -57,6 +53,11 @@ public class Bank {
             throw new Exception("The client is not active, maximum transfer allowed is " + _limitOnTransferForSuspiciousAccount);
         }
         client.transfer(accountFrom, accountTo, amountToTransfer);
+    }
+
+    public void undoLastTransaction(IAccount account) throws Exception {
+        var client = getClientWithAccountId(account._accountID);
+        client.undo(account);
     }
 
     public Client getClientWithAccountId(UUID accountId) throws Exception {
@@ -84,10 +85,12 @@ public class Bank {
                 System.out.println("Address: " + client.getAddress());
             if (client.getPassportNumber() != null)
                 System.out.println("Passport number: " + client.getPassportNumber());
+            System.out.println("");
         }
     }
 
     public double getPercentage() {
         return _percentage;
     }
+
 }

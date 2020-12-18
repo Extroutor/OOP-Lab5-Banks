@@ -35,7 +35,7 @@ public class DebitAccount implements IAccount {
 
     @Override
     public void calculateDailyPercent(Long day) {
-        var dailyPercentRate = percentage / 365; //округлить
+        var dailyPercentRate = percentage / 365;
         var todaysPercent = dailyPercentRate * accountBalance;
         _dailyPercentageList.put(day, todaysPercent);
     }
@@ -50,5 +50,15 @@ public class DebitAccount implements IAccount {
         System.out.println("This months percent : " + monthlyPercent);
         _dailyPercentageList.clear();
         return monthlyPercent;
+    }
+
+    public void listOfTransactions(IAccount account) {
+
+        for (var trans : TransactionsList) {
+
+            trans.getList();
+
+        }
+
     }
 }

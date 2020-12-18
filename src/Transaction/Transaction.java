@@ -3,10 +3,10 @@ package Transaction;
 import java.util.Date;
 import java.util.UUID;
 
-public class Transaction {
+public abstract class Transaction {
 
     public UUID transactionId;
-    public long TransactionTime;
+    public String TransactionTime;
     public UUID SourceAccountId;
     public Double TransactionAmount;
     public UUID DestinationAccountId;
@@ -15,6 +15,22 @@ public class Transaction {
     {
         transactionId = UUID.randomUUID();
         Date date = new Date();
-        TransactionTime = date.getTime();
+        TransactionTime = date.toString();
     }
+
+    public Double getTransactionAmount() {
+        return TransactionAmount;
+    }
+
+    public UUID getTransactionId() {
+        return transactionId;
+    }
+
+    public abstract String getType();
+
+    public String getTime() {
+        return TransactionTime;
+    }
+
+    public abstract void getList();
 }

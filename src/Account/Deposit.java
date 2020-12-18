@@ -52,20 +52,29 @@ public class Deposit implements IAccount {
 
     @Override
     public void calculateDailyPercent(Long day) {
-        double dailyProfitRate = _percentage / 365;
-        Double todaysProfit = dailyProfitRate * _accountBalance;
-        _dailyPercentageList.put(day, todaysProfit);
+        double dailyPercentRate = _percentage / 365;
+        Double todaysPercent = dailyPercentRate * _accountBalance;
+        _dailyPercentageList.put(day, todaysPercent);
     }
 
     @Override
     public Double calculateMonthlyPercent() {
-        Double monthlyProfit = null;
+        Double monthlyPercent = null;
         for (var day : _dailyPercentageList.keySet()) {
-            monthlyProfit += _dailyPercentageList.get(day);
+            monthlyPercent += _dailyPercentageList.get(day);
         }
-        _accountBalance += monthlyProfit;
-        System.out.println("This months Profit : " + monthlyProfit);
+        _accountBalance += monthlyPercent;
+        System.out.println("This months payout : " + monthlyPercent);
         _dailyPercentageList.clear();
-        return monthlyProfit;
+        return monthlyPercent;
+    }
+
+    public void listOfTransactions(IAccount account) {
+
+        for (var trans : TransactionsList) {
+
+            trans.getList();
+
+        }
     }
 }
